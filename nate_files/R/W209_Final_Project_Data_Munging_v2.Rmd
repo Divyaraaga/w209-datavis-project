@@ -1,0 +1,312 @@
+---
+title: "W209 Final Project Data Munging - Wide to Long"
+author: "Nathaniel Velarde"
+date: "November 9, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+# Removing all of the variables in the current work space
+rm(list = ls())
+
+# setting global chunk options
+library(knitr)
+
+# *tidy up* the code when they are printed out
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=FALSE)
+# removes the ## before output lines
+opts_chunk$set(comment=NA)
+# changing max.print option - default = 1000
+options(max.print = 10000)
+```
+
+```{r libraries, echo=FALSE, include=FALSE}
+library(tidyr)
+library(dplyr) # includes dyplr, ggplot2, tidyr, tibble
+library(data.table)
+```
+
+
+# Loading Data File - `EdStatsData.csv`
+
+```{r}
+# loading in data from csv - large file, takes +1 minute to load
+df <- read.csv("EdStatsData.csv")
+```
+
+```{r}
+# examining loaded data
+dim(df)
+cat("\n")
+head(df)
+```
+
+```{r}
+# getting column names
+colnames(df)
+```
+
+# Eliminating Columns With All NAs
+
+```{r}
+# basic code to check if column has all na's
+all(is.na(df$X))
+```
+
+```{r}
+all_na_col <- sapply(df, function(x) all(is.na(x)))
+```
+
+**Used `sapply` versus `apply` and `lapply` because you can retrieve the column name and then use it for the results `data.frame`**
+
+```{r}
+all_na_col <- data.frame(all_na_col)
+```
+
+```{r}
+# only one column has all NAs
+head(all_na_col)
+tail(all_na_col)
+```
+
+```{r}
+dim(df)
+```
+
+```{r}
+# going to drop the column with all NAs - X
+df <- subset(df, select = -X)
+dim(df)
+cat("\n")
+head(df)
+```
+
+# Removing Rows Where All Year Columns Have NAs
+
+```{r}
+colnames(df)
+```
+
+```{r}
+# colnames gives you a character vector
+# for this part of the munging, only interested in the years columns
+colnames(df)[5:69]
+```
+
+```{r}
+# proof of concept that can slice an r dataframe like this
+head(df)[colnames(df)[5:69]]
+```
+
+```{r}
+length(colnames(df)[5:69])
+```
+
+## Going to create a new dataframe consisting just of the year columns
+
+```{r}
+# colnmaes is a character vector
+years_subframe <- df[colnames(df)[5:69]]
+
+dim(years_subframe) # should have the same number of rows as df, but 4 less columns
+dim(df)
+
+cat("\n")
+
+head(years_subframe)
+```
+
+## Now going to remove all rows in the years subframe that have all NAs
+
+```{r}
+years_row_na <- apply(years_subframe, 1, function(x) all(is.na(x)) )
+
+length(years_row_na) # should have same number of rows as df
+cat("\n")
+head(years_row_na)
+```
+
+```{r}
+# number of rows that have at least one non-NA value -- the number of rows in the new "cleaned" dataframe to
+# be constructed below
+sum(years_row_na)
+```
+
+```{r}
+# number of rows and column in dataframe before NA row removal
+dim(df)
+cat("\n")
+dim(df)[1] - sum(years_row_na) # number of all NA rows to be removed
+```
+
+## Use resulting vector to mask main dataframe
+
+```{r}
+# masking dataframe
+df <- df[years_row_na == FALSE, ]
+
+# confirming results
+dim(df)
+cat("\n")
+head(df)
+```
+
+# Now can move to convert dataframe from wide to long format
+
+Our ideal format is to create a new column `Year` which will designate the Year for each row and each indicator of interest will have its own column with values corresponding to a `country-year`
+
+```{r}
+wide <- df
+```
+
+## Going to use `dyplr::gather()` to convert to individual year columns to a single `Year` column and a `Value` column
+
+- the `Value` column will then be expanded later such that each indicator will have its own column
+
+```{r}
+long <- wide %>% gather("Year", "Value", X1970:X2100)
+
+dim(long)
+cat("\n")
+head(long)
+```
+
+**Removing X from Year**
+
+```{r}
+# removing the 'X' from Year aand converting datatype from string to numeric (which becomes useful below)
+long$Year = as.numeric(gsub("X", "", long$Year))
+head(long)
+```
+
+**At this point you could export this to a .csv file, but the file would be huge with 23.2 MM rows.  Limiting the data to only useful indicators and removing the forecast years -- feel free to leave the forecast years in if you find a forecast indicator with values for many countries**
+
+## Filtering out Forecast Years
+
+```{r}
+# taking out years 2020 and greater
+long <- long %>% filter(Year < 2020)
+dim(long)
+```
+
+## Creating a `filter-vector` of the indicators of interest
+
+**Easier to use the `Indicator.Code` because you have to create the `filter.vector` manually**
+
+**These are the ones I chose, you can select your own -- easiest to cut and paste the `Indicator.Code` from Excel**
+
+```{r}
+filter_vector <- c("NY.GDP.PCAP.CD",
+                   "SE.PRM.TENR",
+                   "SE.PRM.TENR.FE",
+                   "UIS.NERA.1.GPI",
+                   "SE.PRM.DROP.ZS",
+                   "SE.PRM.ENRR",
+                   "SE.PRM.ENRR.FE",
+                   "SE.ENR.PRIM.FM.ZS",
+                   "SE.PRM.ENRR.MA",
+                   "SE.SEC.ENRR",
+                   "SE.SEC.ENRR.FE",
+                   "SE.ENR.SECO.FM.ZS",
+                   "SE.SEC.ENRR.MA",
+                   "SE.TER.ENRR",
+                   "SE.TER.ENRR.FE",
+                   "SE.ENR.TERT.FM.ZS",
+                   "SE.TER.ENRR.MA",
+                   "SP.POP.GROW",
+                   "SP.POP.0014.TO.ZS",
+                   "SP.POP.1564.TO.ZS",
+                   "SP.POP.TOTL.FE.ZS",
+                   "SP.POP.TOTL.MA.ZS",
+                   "BAR.NOED.15UP.FE.ZS",
+                   "SE.XPD.TOTL.GB.ZS",
+                   "SE.XPD.TOTL.GD.ZS",
+                   "UIS.XUNIT.PPP.1.FSGOV",
+                   "SL.TLF.ADVN.ZS",
+                   "SL.TLF.ADVN.FE.ZS",
+                   "SL.TLF.ADVN.MA.ZS",
+                   "SL.TLF.BASC.ZS",
+                   "SL.TLF.BASC.FE.ZS",
+                   "SL.TLF.BASC.MA.ZS",
+                   "SL.TLF.INTM.ZS",
+                   "SL.TLF.INTM.FE.ZS",
+                   "SL.TLF.INTM.MA.ZS",
+                   "SL.TLF.TOTL.FE.ZS")
+```
+
+
+```{r}
+# of Indicators Chosen
+length(filter_vector)
+```
+
+## Filtering `long` dataframe by `filter.vector`
+
+```{r}
+filtered_long <- long %>% filter(Indicator.Code %in% filter_vector)
+
+dim(filtered_long)
+cat("\n")
+head(filtered_long)
+```
+
+**At this point, you could export the filtered dataframe to .csv -- this format may be compatible with Tableau, but you may have to use the pivot function or some other manipulation to get it to work in Tableau**
+
+**To export to .csv**
+
+```{r}
+# write.csv(df_name_to_export, file = "YOUR_FILENAME.csv", row.names=FALSE)
+```
+
+
+
+===========================================================
+
+# Retaining a Single Column of Values -- `Indicator.Value` -- that may facillitate some Tableau Functions
+
+```{r}
+filtered_long$Indicator.Value <- filtered_long$Value
+```
+
+```{r}
+head(filtered_long)
+```
+
+==================================================
+
+# Now converting back to (Semi) Wide Format with each Indicator.Code Having its Own Column of Values
+
+```{r}
+# expect new df to have num cols = orig cols - 2 (Indicator.Code and Value) + num new cols (length of filter_vector)
+filtered_wide <- spread(filtered_long, Indicator.Code, Value)
+```
+
+```{r}
+# confirming transformation resulted in correct dimensions
+length(filter_vector)
+cat("\n")
+dim(filtered_long)
+cat("\n")
+dim(filtered_wide)
+```
+
+```{r}
+head(filtered_wide)
+```
+
+## How to Test Data Availability in Terms of Number of Years for a Particlar Indicator.Code and Country
+
+```{r}
+# to see year availability need to have column of interest in select() and filter()
+filtered_wide %>% select(Country.Name, Year, SL.TLF.TOTL.FE.ZS) %>% filter(Country.Name == 'France', SL.TLF.TOTL.FE.ZS)
+```
+
+# Writing to CSV
+
+```{r}
+# write.csv(filtered_wide, file = "YOUR_FILENAME.csv", row.names=FALSE)
+```
+
+
+
+
