@@ -1,0 +1,17 @@
+.mainImg {
+	/*background-color: #2B3E50;*/
+	border-radius: 50%;
+	/*padding: 20px; */
+	width: 200px;
+	height: 200px;
+	/*background-image: url("../img/children3.jpg"); */
+}
+
+.iconImg {
+	background-color: #2B3E50;
+	border-radius: 50%;
+	padding-top: -20px; 
+	width: 30px;
+	height: 30px;
+	/*background-image: url("../img/children3.jpg"); */
+}
