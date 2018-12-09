@@ -4,6 +4,8 @@
 
 **Hosted:** http://people.ischool.berkeley.edu/~divyaraaga/eduStats/index.html
 
+![](Overview.JPG)
+
 ## Description: ##
 Explore dashboards to make comparisons, identify trends and discover relationships between educational indicators, government policies and key macroeconomic/demographic measures at the global, regional and country level.
 
