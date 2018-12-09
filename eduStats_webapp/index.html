@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>EduStats</title>
+		<title>EduStats-v2</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,83 +32,214 @@
 		<nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
 			<span> <img class="img-fluid iconImg" alt="" src="img/icon.jpeg"> </span>
 			<span> <a class="navbar-brand navbar-small" href="#page-top" style="font-size: 1.1em"> w209-Final Project</span></a> </span>
+			<button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				Menu
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#datausers">Data/Users</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#overall">Overview</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#">Distribution</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#relationships">Relationships</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#trends">Trends</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+					</li>
+				</ul>
+			</div>
 		</nav>
 
-		<!-- Header -->
 		<header class="masthead bg-primary text-white text-center">
 			<div class="container">
-				<img class="img-fluid mb-5 d-block mx-auto mainImg" alt="" src="img/children.png">
-				<h2 class="text-uppercase mb-0">Visualisation of World Education Statistics</h2>
-				<hr class="star-light">
-				<h3 class="font-weight-light mb-0"> The analysis below is an attempt to visualize various education statistics(indicators) gathered by multiple organizations
-				around the world and put together as World Education Statistics dataset. </h3>
+				<div class="row">
+					<img class="img-fluid mb-5 d-block mx-auto mainImg" alt="" src="img/children.png">
+					<h2 class="mb-0">Explore educational opportunities to women using World bank education Statistics data</h2>
+					<br/>
+					<br/>
+					<p class="hjustify pstyle">
+						<b>GOAL:</b> Enable users to efficiently navigate the World Bank EdStats dataset and aid in the iterative cycle of
+						data exploration, hypothesis generation and testing with the ultimate aim of improving educational
+						policies that improve outcomes
+					</p>
+				</div>
 			</div>
 		</header>
 
-		<!-- basic map Section -->
-		<section class="portfolio" id="portfolio">
+		<section class="portfolio" id="datausers">
 			<div class="container">
-				<h3 class="text-center text-uppercase text-secondary mb-0">Visualisations</h3>
-				<hr class="star-dark mb-5">
 				<div class="row">
-					<div class="col-md-6 col-lg-4">
-						<a class="portfolio-item d-block mx-auto" href="#portfolio-modal-1">
-						<div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-							<div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-								<i class="fas fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img class="img-fluid" src="img/visualisation/EducationEnr_year.png" alt=""> </a>
+					<p class="pstyle">
+						<b>DATA:</b> The World Bank EdStats All Indicator Query dataset holds around 4,000 internationally
+						comparable features that describe education access, progression, completion, literacy, teachers, population, and expenditures. The indicators cover the education cycle from pre- primary to vocational and tertiary education.
+						<br>
+					</p>
+					<p class="pstyle">
+						<b>USERS:</b> Policy analysts, government education/development officials, NGOs who are interested
+						in data from The World Bank EdStats dataset
+					</p>
+					<img class="img-fluid" style="" alt="" src="img/Tasks.png">
+				</div>
+			</div>
+		</section>
+
+		<!-- basic map Section -->
+		<section class="overall bg-primary text-white" id="overall">
+			<div class="container">
+				<div class="row">
+					<h3>Overview </h3>
+					<div>
+						<p class="pstyle">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis
+							inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam
+						</p>
+						<p class="pstyle">
+							<b>Insights:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam
+						</p>
 					</div>
-					<div class="col-md-6 col-lg-4">
-						<a class="portfolio-item d-block mx-auto" href="#portfolio-modal-2">
-						<div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-							<div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-								<i class="fas fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img class="img-fluid" src="img/visualisation/EducationEnr_years.png" alt=""> </a>
-					</div>
-					<div class="col-md-6 col-lg-4">
-						<a class="portfolio-item d-block mx-auto" href="#portfolio-modal-3">
-						<div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-							<div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-								<i class="fas fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img class="img-fluid" src="img/visualisation/Educ_GDP_year.png" alt=""> </a>
-					</div>
-					<div class="col-md-6 col-lg-4">
-						<a class="portfolio-item d-block mx-auto" href="#portfolio-modal-4">
-						<div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-							<div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-								<i class="fas fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img class="img-fluid" src="img/visualisation/Gov exp_years.png" alt=""> </a>
-					</div>
-					<div class="col-md-6 col-lg-4">
-						<a class="portfolio-item d-block mx-auto" href="#portfolio-modal-5">
-						<div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-							<div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-								<i class="fas fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img class="img-fluid" src="img/visualisation/GDPvsEnr_years.png" alt=""> </a>
+					<div>
+						<div class='tableauPlaceholder' id='viz1544389610045' style='position: relative'>
+							<noscript>
+								<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;3F&#47;3FMB25MPG&#47;1_rss.png' style='border: none' /></a>
+							</noscript>
+							<object class='tableauViz'  style='display:none;'>
+								<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+								<param name='embed_code_version' value='3' />
+								<param name='path' value='shared&#47;3FMB25MPG' />
+								<param name='toolbar' value='yes' />
+								<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;3F&#47;3FMB25MPG&#47;1.png' />
+								<param name='animate_transition' value='yes' />
+								<param name='display_static_image' value='yes' />
+								<param name='display_spinner' value='yes' />
+								<param name='display_overlay' value='yes' />
+								<param name='display_count' value='yes' />
+								<param name='filter' value='publish=yes' />
+							</object>
+						</div>
+						<script type='text/javascript'>
+							var divElement = document.getElementById('viz1544389610045');
+							var vizElement = divElement.getElementsByTagName('object')[0];
+							vizElement.style.width = '1200px';
+							vizElement.style.height = '827px';
+							var scriptElement = document.createElement('script');
+							scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+							vizElement.parentNode.insertBefore(scriptElement, vizElement);
+						</script>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Footer -->
-		<footer class="footer text-center">
+		<section class="portfolio" id="relationships">
 			<div class="container">
+				<div class="row">
+					<h3>Analyze and compare relationships of key education indicators and key macroeconomic and demographic measures </h3>
+					<div>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis
+							inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam
+						</p>
+						<p>
+							<b>Insights:</b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam
+						</p>
+					</div>
+					<div>
+						<div class='tableauPlaceholder' id='viz1544322633962' style='position: relative'>
+							<noscript>
+								<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MacroOutcomevsEnrollment_trend&#47;Scatter_Dash_Final&#47;1_rss.png' style='border: none' /></a>
+							</noscript>
+							<object class='tableauViz'  style='display:none;'>
+								<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+								<param name='embed_code_version' value='3' />
+								<param name='site_root' value='' />
+								<param name='name' value='MacroOutcomevsEnrollment_trend&#47;Scatter_Dash_Final' />
+								<param name='tabs' value='no' />
+								<param name='toolbar' value='yes' />
+								<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MacroOutcomevsEnrollment_trend&#47;Scatter_Dash_Final&#47;1.png' />
+								<param name='animate_transition' value='yes' />
+								<param name='display_static_image' value='yes' />
+								<param name='display_spinner' value='yes' />
+								<param name='display_overlay' value='yes' />
+								<param name='display_count' value='yes' />
+								<param name='filter' value='publish=yes' />
+							</object>
+						</div>
+						<script type='text/javascript'>
+							var divElement = document.getElementById('viz1544322633962');
+							var vizElement = divElement.getElementsByTagName('object')[0];
+							vizElement.style.width = '1200px';
+							vizElement.style.height = '827px';
+							var scriptElement = document.createElement('script');
+							scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+							vizElement.parentNode.insertBefore(scriptElement, vizElement);
+						</script>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="portfolio bg-primary text-white" id="trends" >
+			<div class="container">
+				<div class="row">
+					<h3 >Analyze and compare trends of key education indicators and key macroeconomic and demographic measures </h3>
+					<div>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis
+							inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam
+						</p>
+						<p>
+							<b>Insights:</b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam
+						</p>
+					</div>
+					<div>
+						<div class='tableauPlaceholder' id='viz1544321510450' style='position: relative'>
+							<noscript>
+								<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MacroOutcomevsEnrollment_trend&#47;DrillDown_Dash2&#47;1_rss.png' style='border: none' /></a>
+							</noscript>
+							<object class='tableauViz'  style='display:none;'>
+								<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+								<param name='embed_code_version' value='3' />
+								<param name='site_root' value='' />
+								<param name='name' value='MacroOutcomevsEnrollment_trend&#47;DrillDown_Dash2' />
+								<param name='tabs' value='no' />
+								<param name='toolbar' value='yes' />
+								<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MacroOutcomevsEnrollment_trend&#47;DrillDown_Dash2&#47;1.png' />
+								<param name='animate_transition' value='yes' />
+								<param name='display_static_image' value='yes' />
+								<param name='display_spinner' value='yes' />
+								<param name='display_overlay' value='yes' />
+								<param name='display_count' value='yes' />
+								<param name='filter' value='publish=yes' />
+							</object>
+						</div>
+						<script type='text/javascript'>
+							var divElement = document.getElementById('viz1544321510450');
+							var vizElement = divElement.getElementsByTagName('object')[0];
+							vizElement.style.width = '1200px';
+							vizElement.style.height = '727px';
+							var scriptElement = document.createElement('script');
+							scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+							vizElement.parentNode.insertBefore(scriptElement, vizElement);
+						</script>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Footer -->
+		<footer class="footer text-center" id="about">
+			<div class="container-fluid">
 				<h2 class="text-center text-uppercase text-white">About us</h2>
 				<br>
 				<div class="row">
-					<div class="col-md-3 mb-5 mb-lg-0">
-						<h4 class="text-uppercase mb-4">Divya Raaga</h4>
-						<p class="lead mb-0">
-							2215 John Daniel Drive
-							<br>
-							Clark, MO 65243
-						</p>
-					</div>
 					<div class="col-md-3 mb-5 mb-lg-0">
 						<h4 class="text-uppercase mb-4">Charlene chen</h4>
 						<p class="lead mb-0">
@@ -118,7 +249,7 @@
 						</p>
 					</div>
 					<div class="col-md-3 mb-5 mb-lg-0">
-						<h4 class="text-uppercase mb-4">Nate Velarde</h4>
+						<h4 class="text-uppercase mb-4">Divya Raaga</h4>
 						<p class="lead mb-0">
 							2215 John Daniel Drive
 							<br>
@@ -127,6 +258,14 @@
 					</div>
 					<div class="col-md-3 mb-5 mb-lg-0">
 						<h4 class="text-uppercase mb-4">Matt Thielen</h4>
+						<p class="lead mb-0">
+							2215 John Daniel Drive
+							<br>
+							Clark, MO 65243
+						</p>
+					</div>
+					<div class="col-md-3 mb-5 mb-lg-0">
+						<h4 class="text-uppercase mb-4">Nate Velarde</h4>
 						<p class="lead mb-0">
 							2215 John Daniel Drive
 							<br>
@@ -143,251 +282,6 @@
 			</div>
 		</div>
 
-		<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-		<div class="scroll-to-top d-lg-none position-fixed ">
-			<a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"> <i class="fa fa-chevron-up"></i> </a>
-		</div>
-
-		<!-- Visualisation Modals -->
-
-		<!-- Visualisation Modal 1 -->
-		<div class="portfolio-modal mfp-hide" id="portfolio-modal-1">
-			<div class="portfolio-modal-dialog bg-white">
-				<a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#"> <i class="fa fa-3x fa-times"></i> </a>
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-lg-8 mx-auto">
-							<h5 class="text-secondary text-uppercase mb-0">Enrollment to Education for a specific year</h5>
-							<hr class="star-dark mb-5">
-							<div class='tableauPlaceholder' id='viz1543380715558' style='position: relative; margin-left: -120px'>
-								<noscript>
-									<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;Enrollmenttoeducation&#47;EducationEnr_year&#47;1_rss.png' style='border: none' /></a>
-								</noscript>
-								<object class='tableauViz'  style='display:none;'>
-									<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-									<param name='embed_code_version' value='3' />
-									<param name='site_root' value='' />
-									<param name='name' value='Enrollmenttoeducation&#47;EducationEnr_year' />
-									<param name='tabs' value='no' />
-									<param name='toolbar' value='yes' />
-									<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;Enrollmenttoeducation&#47;EducationEnr_year&#47;1.png' />
-									<param name='animate_transition' value='yes' />
-									<param name='display_static_image' value='yes' />
-									<param name='display_spinner' value='yes' />
-									<param name='display_overlay' value='yes' />
-									<param name='display_count' value='yes' />
-									<param name='filter' value='publish=yes' />
-								</object>
-							</div>
-							<script type='text/javascript'>
-								var divElement = document.getElementById('viz1543380715558');
-								var vizElement = divElement.getElementsByTagName('object')[0];
-								vizElement.style.width = '1000px';
-								vizElement.style.height = '727px';
-								var scriptElement = document.createElement('script');
-								scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-								vizElement.parentNode.insertBefore(scriptElement, vizElement);
-							</script>
-							<p class="mb-5">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-							</p>
-							<a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#"> <i class="fa fa-close"></i> Close Viz</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal 2 -->
-		<div class="portfolio-modal mfp-hide" id="portfolio-modal-2">
-			<div class="portfolio-modal-dialog bg-white">
-				<a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#"> <i class="fa fa-3x fa-times"></i> </a>
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-lg-8 mx-auto">
-							<h5 class="text-secondary text-uppercase mb-0">Enrollment to education over the past 14 years</h5>
-							<hr class="star-dark mb-5">
-							<div class='tableauPlaceholder' id='viz1543381094303' style='position: relative; margin-left: -120px'>
-								<noscript>
-									<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;EnrollmenttoEducationinpast14years&#47;EducationEnr_years&#47;1_rss.png' style='border: none' /></a>
-								</noscript>
-								<object class='tableauViz'  style='display:none;'>
-									<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-									<param name='embed_code_version' value='3' />
-									<param name='site_root' value='' />
-									<param name='name' value='EnrollmenttoEducationinpast14years&#47;EducationEnr_years' />
-									<param name='tabs' value='no' />
-									<param name='toolbar' value='yes' />
-									<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;EnrollmenttoEducationinpast14years&#47;EducationEnr_years&#47;1.png' />
-									<param name='animate_transition' value='yes' />
-									<param name='display_static_image' value='yes' />
-									<param name='display_spinner' value='yes' />
-									<param name='display_overlay' value='yes' />
-									<param name='display_count' value='yes' />
-									<param name='filter' value='publish=yes' />
-								</object>
-							</div>
-							<script type='text/javascript'>
-								var divElement = document.getElementById('viz1543381094303');
-								var vizElement = divElement.getElementsByTagName('object')[0];
-								vizElement.style.width = '1000px';
-								vizElement.style.height = '727px';
-								var scriptElement = document.createElement('script');
-								scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-								vizElement.parentNode.insertBefore(scriptElement, vizElement);
-							</script>
-							<p class="mb-5">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-							</p>
-							<a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#"> <i class="fa fa-close"></i> Close Project</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal 3 -->
-		<div class="portfolio-modal mfp-hide" id="portfolio-modal-3">
-			<div class="portfolio-modal-dialog bg-white">
-				<a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#"> <i class="fa fa-3x fa-times"></i> </a>
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-lg-8 mx-auto">
-							<h5 class="text-secondary text-uppercase mb-0">Enrollment to education and GDP for a particular YEAR</h5>
-							<hr class="star-dark mb-5">
-							<div class='tableauPlaceholder' id='viz1543385836071' style='position: relative;margin-left: -120px'>
-								<noscript>
-									<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;EnrollmenttoEducationandGDPyear&#47;Educ_GDP_year&#47;1_rss.png' style='border: none' /></a>
-								</noscript>
-								<object class='tableauViz'  style='display:none;'>
-									<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-									<param name='embed_code_version' value='3' />
-									<param name='path' value='views&#47;EnrollmenttoEducationandGDPyear&#47;Educ_GDP_year?:embed=y&amp;:display_count=y&amp;publish=yes' />
-									<param name='toolbar' value='yes' />
-									<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;En&#47;EnrollmenttoEducationandGDPyear&#47;Educ_GDP_year&#47;1.png' />
-									<param name='animate_transition' value='yes' />
-									<param name='display_static_image' value='yes' />
-									<param name='display_spinner' value='yes' />
-									<param name='display_overlay' value='yes' />
-									<param name='display_count' value='yes' />
-									<param name='filter' value='publish=yes' />
-								</object>
-							</div>
-							<script type='text/javascript'>
-								var divElement = document.getElementById('viz1543385836071');
-								var vizElement = divElement.getElementsByTagName('object')[0];
-								vizElement.style.width = '1000px';
-								vizElement.style.height = '827px';
-								var scriptElement = document.createElement('script');
-								scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-								vizElement.parentNode.insertBefore(scriptElement, vizElement);
-							</script>
-							<p class="mb-5">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-							</p>
-							<a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#"> <i class="fa fa-close"></i> Close Project</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal 4 -->
-		<div class="portfolio-modal mfp-hide" id="portfolio-modal-4">
-			<div class="portfolio-modal-dialog bg-white">
-				<a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#"> <i class="fa fa-3x fa-times"></i> </a>
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-lg-8 mx-auto">
-							<h5 class="text-secondary text-uppercase mb-0">Government Expenditure on education over the past 14 years</h5>
-							<hr class="star-dark mb-5">
-							<div class='tableauPlaceholder' id='viz1543389119769' style='position: relative;margin-left: -120px'>
-								<noscript>
-									<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Go&#47;GovernmentExpenditureoneducationyear&#47;Govexp_years&#47;1_rss.png' style='border: none' /></a>
-								</noscript>
-								<object class='tableauViz'  style='display:none;'>
-									<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-									<param name='embed_code_version' value='3' />
-									<param name='site_root' value='' />
-									<param name='name' value='GovernmentExpenditureoneducationyear&#47;Govexp_years' />
-									<param name='tabs' value='no' />
-									<param name='toolbar' value='yes' />
-									<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Go&#47;GovernmentExpenditureoneducationyear&#47;Govexp_years&#47;1.png' />
-									<param name='animate_transition' value='yes' />
-									<param name='display_static_image' value='yes' />
-									<param name='display_spinner' value='yes' />
-									<param name='display_overlay' value='yes' />
-									<param name='display_count' value='yes' />
-									<param name='filter' value='publish=yes' />
-								</object>
-							</div>
-							<script type='text/javascript'>
-								var divElement = document.getElementById('viz1543389119769');
-								var vizElement = divElement.getElementsByTagName('object')[0];
-								vizElement.style.width = '1000px';
-								vizElement.style.height = '727px';
-								var scriptElement = document.createElement('script');
-								scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-								vizElement.parentNode.insertBefore(scriptElement, vizElement);
-							</script>
-							<p class="mb-5">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-							</p>
-							<a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#"> <i class="fa fa-close"></i> Close Project</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal 5 -->
-		<div class="portfolio-modal mfp-hide" id="portfolio-modal-5">
-			<div class="portfolio-modal-dialog bg-white">
-				<a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#"> <i class="fa fa-3x fa-times"></i> </a>
-				<div class="container text-center">
-					<div class="row">
-						<div class="col-lg-8 mx-auto">
-							<h2 class="text-secondary text-uppercase mb-0"></h2>
-							<div class='tableauPlaceholder' id='viz1543390144877' style='position: relative'>
-								<noscript>
-									<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;GD&#47;GDPvsGovexpenditureoneducation&#47;GDPvsEnr_years&#47;1_rss.png' style='border: none' /></a>
-								</noscript>
-								<object class='tableauViz'  style='display:none;'>
-									<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-									<param name='embed_code_version' value='3' />
-									<param name='site_root' value='' />
-									<param name='name' value='GDPvsGovexpenditureoneducation&#47;GDPvsEnr_years' />
-									<param name='tabs' value='no' />
-									<param name='toolbar' value='yes' />
-									<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;GD&#47;GDPvsGovexpenditureoneducation&#47;GDPvsEnr_years&#47;1.png' />
-									<param name='animate_transition' value='yes' />
-									<param name='display_static_image' value='yes' />
-									<param name='display_spinner' value='yes' />
-									<param name='display_overlay' value='yes' />
-									<param name='display_count' value='yes' />
-									<param name='filter' value='publish=yes' />
-								</object>
-							</div>
-							<script type='text/javascript'>
-								var divElement = document.getElementById('viz1543390144877');
-								var vizElement = divElement.getElementsByTagName('object')[0];
-								vizElement.style.width = '1000px';
-								vizElement.style.height = '827px';
-								var scriptElement = document.createElement('script');
-								scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-								vizElement.parentNode.insertBefore(scriptElement, vizElement);
-							</script>
-							<hr class="star-dark mb-5">
-							<p class="mb-5">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-							</p>
-							<a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#"> <i class="fa fa-close"></i> Close Project</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<!-- Bootstrap core JavaScript -->
 		<script src="vendor/jquery/jquery.min.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -398,7 +292,6 @@
 
 		<!-- Contact Form JavaScript -->
 		<script src="js/jqBootstrapValidation.js"></script>
-		<script src="js/contact_me.js"></script>
 
 		<!-- Custom scripts for this template -->
 		<script src="js/freelancer.min.js"></script>
