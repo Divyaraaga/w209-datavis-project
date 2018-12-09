@@ -16,7 +16,7 @@ Enable users to efficiently navigate the World Bank EdStats dataset and aid in t
 
 | Explore Relationships | See Details and Trends |
 |:---------------------:|:----------------------:|
-| ![](http://people.ischool.berkeley.edu/~aprilkim/img/parallelcoord.gif) | ![](Viz4Gif.gif) |
+| ![](Viz3Gif.gif) | ![](Viz4Gif.gif) |
 
 
 ## Data Sources: ##
