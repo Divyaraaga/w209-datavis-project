@@ -1,0 +1,331 @@
+---
+title: "W209 Final Project Data Munging - Wide to Long"
+author: "Nathaniel Velarde"
+date: "November 9, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+# Removing all of the variables in the current work space
+rm(list = ls())
+
+# setting global chunk options
+library(knitr)
+
+# *tidy up* the code when they are printed out
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=FALSE)
+# removes the ## before output lines
+opts_chunk$set(comment=NA)
+# changing max.print option - default = 1000
+options(max.print = 10000)
+```
+
+```{r libraries, echo=FALSE, include=FALSE}
+library(tidyr)
+library(dplyr) # includes dyplr, ggplot2, tidyr, tibble
+library(data.table)
+```
+
+
+# Loading Data File - `EdStatsData.csv`
+
+```{r}
+# loading in data from csv - large file, takes +1 minute to load
+df <- read.csv("EdStatsData.csv")
+```
+
+```{r}
+# examining loaded data
+dim(df)
+cat("\n")
+head(df)
+```
+
+```{r}
+# getting column names
+colnames(df)
+```
+
+# Eliminating Columns With All NAs
+
+```{r}
+# basic code to check if column has all na's
+all(is.na(df$X))
+```
+
+```{r}
+all_na_col <- sapply(df, function(x) all(is.na(x)))
+```
+
+**Used `sapply` versus `apply` and `lapply` because you can retrieve the column name and then use it for the results `data.frame`**
+
+```{r}
+all_na_col <- data.frame(all_na_col)
+```
+
+```{r}
+# only one column has all NAs
+head(all_na_col)
+tail(all_na_col)
+```
+
+```{r}
+dim(df)
+```
+
+```{r}
+# going to drop the column with all NAs - X
+df <- subset(df, select = -X)
+dim(df)
+cat("\n")
+head(df)
+```
+
+# Removing Rows Where All Year Columns Have NAs
+
+```{r}
+colnames(df)
+```
+
+```{r}
+# colnames gives you a character vector
+# for this part of the munging, only interested in the years columns
+colnames(df)[5:69]
+```
+
+```{r}
+# proof of concept that can slice an r dataframe like this
+head(df)[colnames(df)[5:69]]
+```
+
+```{r}
+length(colnames(df)[5:69])
+```
+
+## Going to create a new dataframe consisting just of the year columns
+
+```{r}
+# colnmaes is a character vector
+years_subframe <- df[colnames(df)[5:69]]
+
+dim(years_subframe) # should have the same number of rows as df, but 4 less columns
+dim(df)
+
+cat("\n")
+
+head(years_subframe)
+```
+
+## Now going to remove all rows in the years subframe that have all NAs
+
+```{r}
+years_row_na <- apply(years_subframe, 1, function(x) all(is.na(x)) )
+
+length(years_row_na) # should have same number of rows as df
+cat("\n")
+head(years_row_na)
+```
+
+```{r}
+# number of rows that have at least one non-NA value -- the number of rows in the new "cleaned" dataframe to
+# be constructed below
+sum(years_row_na)
+```
+
+```{r}
+# number of rows and column in dataframe before NA row removal
+dim(df)
+cat("\n")
+dim(df)[1] - sum(years_row_na) # number of all NA rows to be removed
+```
+
+## Use resulting vector to mask main dataframe
+
+```{r}
+# masking dataframe
+df <- df[years_row_na == FALSE, ]
+
+# confirming results
+dim(df)
+cat("\n")
+head(df)
+```
+
+# Now can move to convert dataframe from wide to long format
+
+Our ideal format is to create a new column `Year` which will designate the Year for each row and each indicator of interest will have its own column with values corresponding to a `country-year`
+
+```{r}
+wide <- df
+```
+
+## Going to use `dyplr::gather()` to convert to individual year columns to a single `Year` column and a `Value` column
+
+- the `Value` column will then be expanded later such that each indicator will have its own column
+
+```{r}
+long <- wide %>% gather("Year", "Value", X1970:X2100)
+
+dim(long)
+cat("\n")
+head(long)
+```
+
+**Removing X from Year**
+
+```{r}
+# removing the 'X' from Year aand converting datatype from string to numeric (which becomes useful below)
+long$Year = as.numeric(gsub("X", "", long$Year))
+head(long)
+```
+
+**At this point you could export this to a .csv file, but the file would be huge with 23.2 MM rows.  Limiting the data to only useful indicators and removing the forecast years -- feel free to leave the forecast years in if you find a forecast indicator with values for many countries**
+
+## Filtering out Forecast Years
+
+```{r}
+# taking out years 2020 and greater
+long <- long %>% filter(Year < 2020)
+dim(long)
+```
+
+## Creating a `filter-vector` of the indicators of interest
+
+**Easier to use the `Indicator.Code` because you have to create the `filter.vector` manually**
+
+**These are the ones I chose, you can select your own -- easiest to cut and paste the `Indicator.Code` from Excel**
+
+```{r}
+filter_vector <- c("SE.PRE.ENRL", "SE.PRE.ENRL.FE",
+                "SE.PRM.ENRL", "SE.PRM.ENRL.FE",
+                "SE.SEC.ENRL", "SE.SEC.ENRL.FE",
+                "SE.TER.ENRL", "SE.TER.ENRL.FE")
+```
+
+
+```{r}
+# of Indicators Chosen
+length(filter_vector)
+```
+
+## Filtering `long` dataframe by `filter.vector`
+```{r}
+head(long)
+```
+```{r}
+#set regions that want to keep
+region = c('East Asia & Pacific', 'Europe & Central Asia', 'Latin America & Caribbean', 'Middle East & North Africa', 'North America', 'Sub-Saharan Africa')
+
+income = c('High income', 'Upper middle income', 'Middle income','Lower middle income','Low income')
+
+```
+
+```{r}
+#filtered_long = long[long$Indicator.Code == filter_vector]
+filtered_1 <- subset(long, Indicator.Code == "SE.PRE.ENRL", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_1$Education = "Pre-primary"
+filtered_1$Gender = "Both"
+head(filtered_1)
+dim(filtered_1)
+```
+
+```{r}
+library(tidyr)
+
+filtered_1_wide = spread(filtered_1, Indicator.Name, Value)
+setnames(filtered_1_wide, old = c('Country.Name','Country.Code', 'Enrolment in pre-primary education, both sexes (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_1_wide <- filtered_1_wide %>% filter(Region.Name %in% region)
+head(filtered_1_wide)
+```
+
+```{r}
+#do all the other 7 indicators
+filtered_2 <- subset(long, Indicator.Code == "SE.PRE.ENRL.FE", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_2$Education = "Pre-primary"
+filtered_2$Gender = "Female"
+filtered_2_wide = spread(filtered_2, Indicator.Name, Value)
+setnames(filtered_2_wide, old = c('Country.Name','Country.Code', 'Enrolment in pre-primary education, female (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_2_wide <- filtered_2_wide %>% filter(Region.Name %in% region)
+
+filtered_3 <- subset(long, Indicator.Code == "SE.PRM.ENRL", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_3$Education = "Primary"
+filtered_3$Gender = "Both"
+filtered_3_wide = spread(filtered_3, Indicator.Name, Value)
+setnames(filtered_3_wide, old = c('Country.Name','Country.Code', 'Enrolment in primary education, both sexes (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_3_wide <- filtered_3_wide %>% filter(Region.Name %in% region)
+
+filtered_4 <- subset(long, Indicator.Code == "SE.PRM.ENRL.FE", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_4$Education = "Primary"
+filtered_4$Gender = "Female"
+filtered_4_wide = spread(filtered_4, Indicator.Name, Value)
+setnames(filtered_4_wide, old = c('Country.Name','Country.Code', 'Enrolment in primary education, female (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_4_wide <- filtered_4_wide %>% filter(Region.Name %in% region)
+
+filtered_5 <- subset(long, Indicator.Code == "SE.SEC.ENRL", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_5$Education = "Secondary"
+filtered_5$Gender = "Both"
+filtered_5_wide = spread(filtered_5, Indicator.Name, Value)
+setnames(filtered_5_wide, old = c('Country.Name','Country.Code', 'Enrolment in secondary education, both sexes (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_5_wide <- filtered_5_wide %>% filter(Region.Name %in% region)
+
+filtered_6 <- subset(long, Indicator.Code == "SE.SEC.ENRL.FE", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_6$Education = "Secondary"
+filtered_6$Gender = "Female"
+filtered_6_wide = spread(filtered_6, Indicator.Name, Value)
+setnames(filtered_6_wide, old = c('Country.Name','Country.Code', 'Enrolment in secondary education, female (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_6_wide <- filtered_6_wide %>% filter(Region.Name %in% region)
+
+filtered_7 <- subset(long, Indicator.Code == "SE.TER.ENRL", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_7$Education = "Tertiary"
+filtered_7$Gender = "Both"
+filtered_7_wide = spread(filtered_7, Indicator.Name, Value)
+setnames(filtered_7_wide, old = c('Country.Name','Country.Code', 'Enrolment in tertiary education, all programmes, both sexes (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_7_wide <- filtered_7_wide %>% filter(Region.Name %in% region)
+
+filtered_8 <- subset(long, Indicator.Code == "SE.TER.ENRL.FE", select = c("Country.Name","Country.Code","Indicator.Name","Year","Value"))
+filtered_8$Education = "Tertiary"
+filtered_8$Gender = "Female"
+filtered_8_wide = spread(filtered_8, Indicator.Name, Value)
+setnames(filtered_8_wide, old = c('Country.Name','Country.Code', 'Enrolment in tertiary education, all programmes, female (number)'), new = c('Region.Name','Region.Code', 'Number.of.Enrolment'))
+filtered_8_wide <- filtered_8_wide %>% filter(Region.Name %in% region)
+```
+
+
+```{r}
+filtered_both = rbind(filtered_1_wide,filtered_3_wide,filtered_5_wide,filtered_7_wide)
+filtered_female = rbind(filtered_2_wide,filtered_4_wide,filtered_6_wide,filtered_8_wide)
+filtered_male =  merge(filtered_both,filtered_female,by=c("Region.Name","Region.Code","Year","Education"))
+filtered_male$Gender = "Male"
+filtered_male$Number.of.Enrolment = filtered_male$Number.of.Enrolment.x - filtered_male$Number.of.Enrolment.y
+filtered_male$Gender.x = NULL
+filtered_male$Number.of.Enrolment.x = NULL
+filtered_male$Gender.y = NULL
+filtered_male$Number.of.Enrolment.y = NULL
+```
+
+```{r}
+filtered_all = rbind(filtered_female,filtered_male)
+filtered_all_education = filtered_all
+filtered_all_education$Vizside = "education"
+filtered_all_gender = filtered_all
+filtered_all_gender$Vizside = "gender"
+filtered_all_region = filtered_all
+filtered_all_region$Vizside = "region"
+
+filtered_all_all = rbind(filtered_all_education,filtered_all_gender,filtered_all_region)
+
+```
+
+# Writing to CSV
+
+```{r}
+write.csv(filtered_all_all, file = "sankey_data.csv", row.names=FALSE)
+```
+
+
+
+
+
+
+
+
