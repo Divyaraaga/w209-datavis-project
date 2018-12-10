@@ -4,7 +4,7 @@
 
 **Hosted:** http://people.ischool.berkeley.edu/~divyaraaga/eduStats/index.html
 
-![](Overview.JPG)
+![](/media/Overview.JPG)
 
 ## Description: ##
 Explore dashboards to make comparisons, identify trends and discover relationships between educational indicators, government policies and key macroeconomic/demographic measures at the global, regional and country level.
@@ -14,11 +14,11 @@ Enable users to efficiently navigate the World Bank EdStats dataset and aid in t
 
 |EdStats Overview |  Discover Distributions |
 |:---------------:|:-----------------------:|
-| ![](http://people.ischool.berkeley.edu/~aprilkim/img/scrolly1.gif)  |  ![](http://people.ischool.berkeley.edu/~aprilkim/img/varietals.gif) |
+| ![](/media/Viz1Gif.gif)  |  ![](/media/Viz2Gif.gif) |
 
 | Explore Relationships | See Details and Trends |
 |:---------------------:|:----------------------:|
-| ![](Viz3Gif.gif) | ![](Viz4Gif.gif) |
+| ![](/media/Viz3Gif.gif) | ![](/media/Viz4Gif.gif) |
 
 
 ## Data Sources: ##
