@@ -1,0 +1,62 @@
+<!doctype html>
+
+<style>
+	.axis .domain {
+		display: none;
+	}
+
+</style>
+
+<html>
+	<head>
+		<base href="/">
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<title>Assignment: Static visualisation</title>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+
+		<link rel="stylesheet" type="text/css" href="http://people.ischool.berkeley.edu/~divyaraaga/main.css">
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.20.0/d3-legend.min.js"></script>
+		<!-- <script src="https://d3js.org/d3-transition.v1.min.js"></script>
+		<script src="https://d3js.org/d3-selection.v1.min.js"></script> -->
+		<script src="http://people.ischool.berkeley.edu/~divyaraaga/main.js"></script>
+
+	</head>
+	<div class="svgg">
+		<div class="heading">
+			<h2><img src="https://thumbs.dreamstime.com/b/dragon-boat-graphic-design-two-paddles-51616438.jpg" class="icon"> Dragon Boat Performance tracking Dashboard</h2>
+		</div>
+		<div class="intro">
+			Dragon boat is a speed sport, for which my team practices daily.
+			The data visualized here, which has been collected from ERGO Dragon Boat trainer represents my performance, in terms of number of paddles, in daily practice sessions.
+		</div>
+		<div class="intro" style="margin-top:10px">
+			Daily practice has laps of three different durations, 3 min, 5 mins and 8 min that are aimed at increasing paddling speed and stamina.
+			Each lap type has a specific target number of paddles for each individual, e.g 180 paddles is the target for a 3 min interval drill.
+			It is very important for each individual to achieve this target in order to synchronize overall team effort.
+		</div>
+		<div class="intro" style="margin-top:10px">
+			This dashboard helps me to check the difference between the target and actual number of paddles I achieved.
+			As the dashboard shows, my performnce in 3 minute drills is consistent, but in the other two drills there is a difference between the
+			target and my actual performance. This difference is shown on top of each bar in the chart.
+		</div>
+		<br>
+		<div class="interactions">
+			<h3> Interactions</h3>
+			<ol>
+				<li>
+					Hover over the bars to see the target, actual and deviation from target.
+				</li>
+				<li>
+					Click on different intervals from the legend to filter the bars accordingly
+				</li>
+			</ol>
+		</div>
+		<svg class="chart" width="800" height="500"></svg>
+
+	</div>
+</html>
+
